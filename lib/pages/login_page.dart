@@ -1,9 +1,11 @@
 import 'package:cinereview/components/block_button.dart';
 import 'package:cinereview/components/custom_form_field.dart';
+import 'package:cinereview/services/auth_service.dart';
 import 'package:cinereview/styles/colors.dart';
 import 'package:cinereview/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,7 +19,15 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  login() {}
+  login() async {
+    try {
+      await context.read<AuthService>().login(email.text, password.text);
+    } on AuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

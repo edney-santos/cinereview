@@ -1,11 +1,13 @@
 import 'package:cinereview/components/block_button.dart';
 import 'package:cinereview/components/custom_form_field.dart';
 import 'package:cinereview/components/genres_dropdown.dart';
+import 'package:cinereview/services/auth_service.dart';
 import 'package:cinereview/styles/colors.dart';
 import 'package:cinereview/styles/text.dart';
 import 'package:cinereview/utils/genres_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,7 +24,15 @@ class _RegisterPageState extends State<RegisterPage> {
   final confirmPassword = TextEditingController();
   String? favGenre = GenresList.menuItems[0];
 
-  register() {}
+  register() async {
+    try {
+      await context.read<AuthService>().register(email.text, password.text);
+    } on AuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
