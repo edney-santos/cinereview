@@ -1,3 +1,6 @@
+import 'package:cinereview/pages/home_page.dart';
+import 'package:cinereview/pages/login_page.dart';
+import 'package:cinereview/pages/resgister_page.dart';
 import 'package:cinereview/widgets/auth_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,9 +17,18 @@ class App extends StatelessWidget {
     ));
 
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(brightness: Brightness.dark, primaryColor: Colors.white),
-        home: const AuthCheck());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.white,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const AuthCheck(),
+        '/home': (context) => const HomePage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage()
+      },
+    );
   }
 }

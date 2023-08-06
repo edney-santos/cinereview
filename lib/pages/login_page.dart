@@ -17,40 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  bool isLogin = true;
-  late String tittle;
-  late String actionButton;
-  late String toggleButton;
-
-  @override
-  void initState() {
-    super.initState();
-    setFormAction(true);
-  }
-
-  setFormAction(bool action) {
-    setState(() {
-      isLogin = action;
-
-      if (isLogin) {
-        tittle = 'Login';
-        actionButton = 'Entrar';
-        toggleButton = 'Ainda não possui conta? Cadastre-se';
-      } else {
-        tittle = 'Cadastro';
-        actionButton = 'Cadastrar-se';
-        toggleButton = 'Já possuo conta';
-      }
-    });
-  }
-
-  login() {
-
-  }
-
-  register() {
-
-  }
+  login() {}
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SvgPicture.asset('assets/images/full_logo.svg'),
               Container(height: 120),
-              Row(
+              const Row(
                 children: [
-                  Text(tittle, style: ProjectText.tittle),
+                  Text('Login', style: ProjectText.tittle),
                 ],
               ),
               Container(height: 32),
@@ -82,9 +49,11 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: false,
                       validators: (value) {
                         if (value!.isEmpty) {
-                          return 'Informe o e-mail corretamente';
+                          return 'Informe um e-mail';
                         }
-
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                          return 'E-mail invalido';
+                        }
                         return null;
                       },
                     ),
@@ -99,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                       validators: (value) {
                         if (value!.isEmpty) {
                           return 'Informe sua senha';
-                        } else if (value.length < 6) {
+                        }
+                        if (value.length < 6) {
                           return 'A senha deve ter ao menos 6 caracteres';
                         }
                         return null;
@@ -112,17 +82,11 @@ class _LoginPageState extends State<LoginPage> {
                         Text('Esqueceu a senha?', style: ProjectText.bold),
                       ],
                     ),
-                    Container(height: 140),
+                    Container(height: 100),
                     BlockButton(
-                      label: actionButton,
+                      label: 'Entrar',
                       onPressed: () => {
-                        if (formKey.currentState!.validate()) {
-                          if (isLogin) {
-                            login()
-                          } else {
-                            register()
-                          }
-                        }
+                        if (formKey.currentState!.validate()) {login()}
                       },
                     ),
                     Container(height: 32),
@@ -130,7 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
-                          onPressed: () => setFormAction(!isLogin),
+                          onPressed: () => Navigator.pushNamed(
+                            context,
+                            '/register',
+                          ),
                           child: const Row(
                             children: [
                               Text(

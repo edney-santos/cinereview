@@ -17,4 +17,8 @@ class AuthService extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  register(String name, String email, String password, String favGenre) {
+    
+  }
 }
