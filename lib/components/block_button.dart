@@ -28,21 +28,22 @@ class BlockButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            gradient: const LinearGradient(
-              colors: [ProjectColors.orange, ProjectColors.pink],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          gradient: const LinearGradient(
+            colors: [ProjectColors.orange, ProjectColors.pink],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-          child: ElevatedButton(
-            style: buttonStyle,
-            onPressed: onPressed,
-            child: Text(
-              label,
-            ),
-          )),
+        ),
+        child: ElevatedButton(
+          style: buttonStyle,
+          onPressed: onPressed,
+          child: Text(
+            label,
+          ),
+        ),
+      ),
     );
   }
 }
