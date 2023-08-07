@@ -1,6 +1,9 @@
+import 'package:cinereview/pages/account_page.dart';
+import 'package:cinereview/pages/favorites_page.dart';
 import 'package:cinereview/pages/home_page.dart';
 import 'package:cinereview/pages/login_page.dart';
 import 'package:cinereview/pages/resgister_page.dart';
+import 'package:cinereview/pages/reviews_page.dart';
 import 'package:cinereview/styles/colors.dart';
 import 'package:cinereview/styles/text.dart';
 import 'package:cinereview/widgets/auth_check.dart';
@@ -31,9 +34,12 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const AuthCheck(),
-        '/home': (context) => const HomePage(),
         '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage()
+        '/register': (context) => const RegisterPage(),
+        '/home': (context) => const HomePage(),
+        '/favorites': (context) => const FavoritesPage(),
+        '/reviews': (context) => const ReviewsPage(),
+        '/account': (context) => const AccountPage(),
       },
     );
   }

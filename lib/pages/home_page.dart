@@ -1,5 +1,8 @@
 import 'package:cinereview/components/block_button.dart';
+import 'package:cinereview/components/nav_bar.dart';
 import 'package:cinereview/services/auth_service.dart';
+import 'package:cinereview/styles/colors.dart';
+import 'package:cinereview/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,12 +21,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: BlockButton(
-          label: 'Sair',
-          onPressed: () => {logout()},
+      backgroundColor: ProjectColors.background,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100, left: 24, right: 24),
+          child: Column(
+            children: [
+              const Text(
+                'Homepage',
+                style: ProjectText.tittle,
+              ),
+              BlockButton(
+                label: 'Sair',
+                onPressed: () => {logout()},
+              )
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: NavBar(context, 0),
     );
   }
 }
