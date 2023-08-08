@@ -1,6 +1,8 @@
 import 'package:cinereview/components/block_button.dart';
 import 'package:cinereview/components/custom_form_field.dart';
 import 'package:cinereview/components/genres_dropdown.dart';
+import 'package:cinereview/models/users_info.dart';
+import 'package:cinereview/repositories/users_repository.dart';
 import 'package:cinereview/services/auth_service.dart';
 import 'package:cinereview/styles/colors.dart';
 import 'package:cinereview/styles/text.dart';
@@ -22,16 +24,24 @@ class _RegisterPageState extends State<RegisterPage> {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
-  String? favGenre = GenresList.menuItems[0];
+  String favGenre = GenresList.menuItems[0];
 
   register() async {
     try {
       await context.read<AuthService>().register(email.text, password.text);
+      await saveInfo();
     } on AuthException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error.message)),
       );
     }
+  }
+
+  saveInfo() async {
+    await UsersRepository(auth: context.read<AuthService>()).saveInfo(
+      UsersInfo(name: name.text, favGenre: favGenre),
+    );
+    Navigator.pushNamed(context, '/');
   }
 
   @override
@@ -120,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       selected: favGenre,
                       onChange: (String? value) {
                         setState(() {
-                          favGenre = value;
+                          favGenre = value!;
                         });
                       },
                     ),
