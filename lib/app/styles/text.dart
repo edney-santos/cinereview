@@ -38,4 +38,11 @@ class ProjectText {
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
+
+  static const TextStyle movieCard = TextStyle(
+    color: Colors.white,
+    fontFamily: fontName,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
 }

@@ -1,8 +1,8 @@
-import 'package:cinereview/app/components/block_button.dart';
 import 'package:cinereview/app/components/nav_bar.dart';
 import 'package:cinereview/app/data/http/http_client.dart';
 import 'package:cinereview/app/data/repositories/movies_repository.dart';
 import 'package:cinereview/app/pages/home/stores/movies_store.dart';
+import 'package:cinereview/app/pages/home/trend_section.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     store.getTrendMovies();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.background,
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ),
         builder: (context, child) {
           if (store.isLoading.value) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (store.error.value.isNotEmpty) {
@@ -64,19 +65,12 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           } else {
-            return Center(
-              child: SingleChildScrollView(
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100, left: 24, right: 24),
                 child: Column(
                   children: [
-                    const Text(
-                      'Carregou os filmes',
-                      style: ProjectText.bold,
-                      textAlign: TextAlign.center,
-                    ),
-                    BlockButton(
-                      label: 'Sair',
-                      onPressed: () => {logout()},
-                    )
+                    TrendSection(movies: store.trendMovies.value),
                   ],
                 ),
               ),
