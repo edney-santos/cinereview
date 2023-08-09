@@ -1,4 +1,4 @@
-import 'package:cinereview/styles/colors.dart';
+import 'package:cinereview/app/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 final buttonStyle = ElevatedButton.styleFrom(

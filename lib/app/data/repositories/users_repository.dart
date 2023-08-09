@@ -1,6 +1,6 @@
-import 'package:cinereview/database/db_firestore.dart';
-import 'package:cinereview/models/users_info.dart';
-import 'package:cinereview/services/auth_service.dart';
+import 'package:cinereview/app/data/database/db_firestore.dart';
+import 'package:cinereview/app/data/models/info_model.dart';
+import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
 import 'package:cinereview/app.dart';
-import 'package:cinereview/repositories/users_repository.dart';
-import 'package:cinereview/services/auth_service.dart';
+import 'package:cinereview/app/data/repositories/users_repository.dart';
+import 'package:cinereview/app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';

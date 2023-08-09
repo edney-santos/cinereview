@@ -1,6 +1,6 @@
-import 'package:cinereview/styles/colors.dart';
-import 'package:cinereview/styles/text.dart';
-import 'package:cinereview/utils/genres_list.dart';
+import 'package:cinereview/app/styles/colors.dart';
+import 'package:cinereview/app/styles/text.dart';
+import 'package:cinereview/app/utils/genres_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 

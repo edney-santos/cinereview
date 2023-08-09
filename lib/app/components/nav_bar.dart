@@ -1,5 +1,5 @@
-import 'package:cinereview/components/gradient_icons.dart';
-import 'package:cinereview/styles/colors.dart';
+import 'package:cinereview/app/components/gradient_icons.dart';
+import 'package:cinereview/app/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 

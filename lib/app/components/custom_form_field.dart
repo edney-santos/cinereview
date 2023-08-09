@@ -1,5 +1,5 @@
-import 'package:cinereview/styles/colors.dart';
-import 'package:cinereview/styles/text.dart';
+import 'package:cinereview/app/styles/colors.dart';
+import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
 
 class CustomFormField extends StatelessWidget {

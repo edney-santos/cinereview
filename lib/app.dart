@@ -1,12 +1,12 @@
-import 'package:cinereview/pages/account_page.dart';
-import 'package:cinereview/pages/favorites_page.dart';
-import 'package:cinereview/pages/home_page.dart';
-import 'package:cinereview/pages/login_page.dart';
-import 'package:cinereview/pages/resgister_page.dart';
-import 'package:cinereview/pages/reviews_page.dart';
-import 'package:cinereview/styles/colors.dart';
-import 'package:cinereview/styles/text.dart';
-import 'package:cinereview/widgets/auth_check.dart';
+import 'package:cinereview/app/pages/account/account_page.dart';
+import 'package:cinereview/app/pages/favorites/favorites_page.dart';
+import 'package:cinereview/app/pages/home/home_page.dart';
+import 'package:cinereview/app/pages/login/login_page.dart';
+import 'package:cinereview/app/pages/register/resgister_page.dart';
+import 'package:cinereview/app/pages/reviews/reviews_page.dart';
+import 'package:cinereview/app/styles/colors.dart';
+import 'package:cinereview/app/styles/text.dart';
+import 'package:cinereview/app/auth/auth_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

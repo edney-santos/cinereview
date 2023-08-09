@@ -1,6 +1,6 @@
-import 'package:cinereview/pages/home_page.dart';
-import 'package:cinereview/pages/login_page.dart';
-import 'package:cinereview/services/auth_service.dart';
+import 'package:cinereview/app/pages/home/home_page.dart';
+import 'package:cinereview/app/pages/login/login_page.dart';
+import 'package:cinereview/app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

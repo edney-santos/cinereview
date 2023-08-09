@@ -1,5 +1,5 @@
-import 'package:cinereview/components/nav_bar.dart';
-import 'package:cinereview/styles/colors.dart';
+import 'package:cinereview/app/components/nav_bar.dart';
+import 'package:cinereview/app/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsPage extends StatelessWidget {

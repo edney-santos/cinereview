@@ -1,9 +1,8 @@
-import 'package:cinereview/components/block_button.dart';
-import 'package:cinereview/components/nav_bar.dart';
-import 'package:cinereview/repositories/users_repository.dart';
-import 'package:cinereview/services/auth_service.dart';
-import 'package:cinereview/styles/colors.dart';
-import 'package:cinereview/styles/text.dart';
+import 'package:cinereview/app/components/block_button.dart';
+import 'package:cinereview/app/components/nav_bar.dart';
+import 'package:cinereview/app/services/auth_service.dart';
+import 'package:cinereview/app/styles/colors.dart';
+import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
