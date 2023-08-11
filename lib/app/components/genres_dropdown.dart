@@ -1,6 +1,6 @@
+import 'package:cinereview/app/data/genres_list.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
-import 'package:cinereview/app/utils/genres_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -59,11 +59,11 @@ class GenresDropdown extends StatelessWidget {
                 ),
                 style: ProjectText.bold,
                 dropdownColor: ProjectColors.gray,
-                items: GenresList.menuItems
+                items: GenresList.menuItens
                     .map<DropdownMenuItem<String>>(
                       (item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(item),
+                        value: item.name,
+                        child: Text(item.name),
                       ),
                     )
                     .toList(),

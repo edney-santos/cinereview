@@ -1,12 +1,12 @@
 import 'package:cinereview/app/components/block_button.dart';
 import 'package:cinereview/app/components/custom_form_field.dart';
 import 'package:cinereview/app/components/genres_dropdown.dart';
+import 'package:cinereview/app/data/genres_list.dart';
 import 'package:cinereview/app/data/models/info_model.dart';
 import 'package:cinereview/app/data/repositories/users_repository.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
-import 'package:cinereview/app/utils/genres_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
-  String favGenre = GenresList.menuItems[0];
+  String favGenre = GenresList.menuItens[0].name;
 
   register() async {
     try {
@@ -41,6 +41,10 @@ class _RegisterPageState extends State<RegisterPage> {
     await UsersRepository(auth: context.read<AuthService>()).saveInfo(
       UsersInfo(name: name.text, favGenre: favGenre),
     );
+    authCheck();
+  }
+
+  authCheck() {
     Navigator.pushNamed(context, '/');
   }
 

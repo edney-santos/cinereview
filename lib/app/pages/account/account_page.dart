@@ -15,6 +15,11 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   logout() async {
     await context.read<AuthService>().logout();
+    authCheck();
+  }
+
+  authCheck() {
+    Navigator.pushNamed(context, '/');
   }
 
   @override

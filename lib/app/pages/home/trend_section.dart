@@ -22,7 +22,7 @@ class TrendSection extends StatelessWidget {
         ),
         Container(height: 16),
         SizedBox(
-          height: 300,
+          height: 260,
           child: ListView.separated(
               itemCount: movies.length,
               separatorBuilder: (context, index) {

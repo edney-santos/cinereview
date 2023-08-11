@@ -1,12 +1,14 @@
 import 'package:cinereview/app/components/nav_bar.dart';
 import 'package:cinereview/app/data/http/http_client.dart';
 import 'package:cinereview/app/data/repositories/movies_repository.dart';
+import 'package:cinereview/app/pages/home/header_section.dart';
 import 'package:cinereview/app/pages/home/stores/movies_store.dart';
 import 'package:cinereview/app/pages/home/trend_section.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,9 +69,11 @@ class _HomePageState extends State<HomePage> {
           } else {
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.only(top: 100, left: 24, right: 24),
+                padding: const EdgeInsets.only(top: 64, left: 24, right: 24),
                 child: Column(
                   children: [
+                    HeaderSection(),
+                    Container(height: 32),
                     TrendSection(movies: store.trendMovies.value),
                   ],
                 ),

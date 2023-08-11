@@ -39,7 +39,7 @@ class App extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/favorites': (context) => const FavoritesPage(),
         '/reviews': (context) => const ReviewsPage(),
-        '/account': (context) => const AccountPage(),
+        '/account': (context) => const AccountPage()
       },
     );
   }
