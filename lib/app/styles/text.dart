@@ -45,4 +45,11 @@ class ProjectText {
     fontSize: 14,
     fontWeight: FontWeight.w700,
   );
+
+  static const TextStyle biggerMovieCard = TextStyle(
+    color: Colors.white,
+    fontFamily: fontName,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
 }
