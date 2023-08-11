@@ -1,4 +1,5 @@
 import 'package:cinereview/app/pages/account/account_page.dart';
+import 'package:cinereview/app/pages/category/category_page.dart';
 import 'package:cinereview/app/pages/favorites/favorites_page.dart';
 import 'package:cinereview/app/pages/home/home_page.dart';
 import 'package:cinereview/app/pages/login/login_page.dart';
@@ -39,7 +40,8 @@ class App extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/favorites': (context) => const FavoritesPage(),
         '/reviews': (context) => const ReviewsPage(),
-        '/account': (context) => const AccountPage()
+        '/account': (context) => const AccountPage(),
+        '/category': (context) => const CategoryPage()
       },
     );
   }
