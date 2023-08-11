@@ -1,10 +1,12 @@
 import 'package:cinereview/app/components/nav_bar.dart';
 import 'package:cinereview/app/data/http/http_client.dart';
+import 'package:cinereview/app/data/models/info_model.dart';
 import 'package:cinereview/app/data/repositories/movies_repository.dart';
+import 'package:cinereview/app/data/repositories/users_repository.dart';
 import 'package:cinereview/app/pages/home/category_section.dart';
 import 'package:cinereview/app/pages/home/header_section.dart';
 import 'package:cinereview/app/pages/home/stores/movies_store.dart';
-import 'package:cinereview/app/pages/home/trend_section.dart';
+import 'package:cinereview/app/pages/home/movie_galery.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
@@ -25,6 +27,13 @@ class _HomePageState extends State<HomePage> {
     ),
   );
 
+  late UsersInfo info;
+
+  getInfo() async {
+    info = await UsersRepository(auth: context.read<AuthService>()).readInfo();
+    store.loadHomepage(info.favGenre);
+  }
+
   logout() async {
     await context.read<AuthService>().logout();
   }
@@ -32,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    store.getTrendMovies();
+    getInfo();
   }
 
   @override
@@ -41,7 +50,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: ProjectColors.background,
       body: AnimatedBuilder(
         animation: Listenable.merge(
-          [store.isLoading, store.error, store.trendMovies],
+          [
+            store.isLoading,
+            store.error,
+            store.trendMovies,
+            store.moviesByGender
+          ],
         ),
         builder: (context, child) {
           if (store.isLoading.value) {
@@ -78,9 +92,18 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     HeaderSection(),
                     Container(height: 32),
-                    TrendSection(movies: store.trendMovies.value),
+                    MovieGalery(
+                      title: 'Populares',
+                      movies: store.trendMovies.value,
+                    ),
                     Container(height: 16),
-                    CategorySection()
+                    const CategorySection(),
+                    Container(height: 48),
+                    MovieGalery(
+                      movies: store.moviesByGender.value,
+                      title: 'Com base no seu perfil',
+                    ),
+                    Container(height: 24)
                   ],
                 ),
               ),

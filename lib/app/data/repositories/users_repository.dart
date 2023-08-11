@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UsersRepository extends ChangeNotifier {
-  UsersInfo info = UsersInfo(name: '', favGenre: '');
   late FirebaseFirestore db;
   late AuthService auth;
 
@@ -28,10 +27,11 @@ class UsersRepository extends ChangeNotifier {
           .collection('users/${auth.user!.uid}/info')
           .doc(auth.user!.uid)
           .get();
-      info = UsersInfo(
+      UsersInfo info = UsersInfo(
         name: snapshot.data()!.values.toList()[1],
         favGenre: snapshot.data()!.values.toList()[0],
       );
+      return info;
     }
   }
 

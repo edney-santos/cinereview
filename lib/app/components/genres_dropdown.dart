@@ -62,7 +62,7 @@ class GenresDropdown extends StatelessWidget {
                 items: GenresList.menuItens
                     .map<DropdownMenuItem<String>>(
                       (item) => DropdownMenuItem<String>(
-                        value: item.name,
+                        value: item.id.toString(),
                         child: Text(item.name),
                       ),
                     )

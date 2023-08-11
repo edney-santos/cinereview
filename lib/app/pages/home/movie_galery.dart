@@ -3,26 +3,30 @@ import 'package:cinereview/app/data/models/movie_model.dart';
 import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
 
-class TrendSection extends StatelessWidget {
+class MovieGalery extends StatelessWidget {
   final List<MovieModel> movies;
+  final String title;
 
-  const TrendSection({super.key, required this.movies});
+  const MovieGalery({super.key, required this.movies, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           children: [
-            Text(
-              'Populares',
-              style: ProjectText.tittle,
+            SizedBox(
+              width: 180,
+              child: Text(
+                title,
+                style: ProjectText.tittle,
+              ),
             ),
           ],
         ),
         Container(height: 16),
         SizedBox(
-          height: 260,
+          height: 258,
           child: ListView.separated(
               itemCount: movies.length,
               separatorBuilder: (context, index) {

@@ -27,7 +27,7 @@ class MovieCard extends StatelessWidget {
             splashColor: Colors.black.withAlpha(30),
             onTap: () {},
             child: SizedBox(
-              width: 124,
+              width: 120,
               height: 180,
               child: Image.network(posterHost + movie.posterPath),
             ),

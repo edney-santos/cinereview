@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
-  String favGenre = GenresList.menuItens[0].name;
+  String favGenre = GenresList.menuItens[0].id.toString();
 
   register() async {
     try {
