@@ -39,9 +39,12 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           builder: (context, child) {
             if (store.isLoading.value) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: ProjectColors.orange,
+              return const Scaffold(
+                backgroundColor: ProjectColors.background,
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: ProjectColors.orange,
+                  ),
                 ),
               );
             }

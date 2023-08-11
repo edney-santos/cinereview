@@ -3,6 +3,7 @@ import 'package:cinereview/app/pages/category/category_page.dart';
 import 'package:cinereview/app/pages/favorites/favorites_page.dart';
 import 'package:cinereview/app/pages/home/home_page.dart';
 import 'package:cinereview/app/pages/login/login_page.dart';
+import 'package:cinereview/app/pages/movieDetails/movie_details.dart';
 import 'package:cinereview/app/pages/register/resgister_page.dart';
 import 'package:cinereview/app/pages/reviews/reviews_page.dart';
 import 'package:cinereview/app/styles/colors.dart';
@@ -41,7 +42,8 @@ class App extends StatelessWidget {
         '/favorites': (context) => const FavoritesPage(),
         '/reviews': (context) => const ReviewsPage(),
         '/account': (context) => const AccountPage(),
-        '/category': (context) => const CategoryPage()
+        '/category': (context) => const CategoryPage(),
+        '/movie/info': (context) => const MovieDetails()
       },
     );
   }

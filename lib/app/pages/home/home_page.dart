@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
           if (store.trendMovies.value.isEmpty) {
             return const Center(
               child: Text(
-                'Nenhum item na lista.',
+                '',
                 style: ProjectText.bold,
                 textAlign: TextAlign.center,
               ),

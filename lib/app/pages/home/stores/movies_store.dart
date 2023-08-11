@@ -2,7 +2,6 @@ import 'package:cinereview/app/data/http/exceptions.dart';
 import 'package:cinereview/app/data/models/movie_model.dart';
 import 'package:cinereview/app/data/repositories/movies_repository.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 
 class MoviesStore {
   final IMoviesRepository repository;

@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class CategoryButton extends StatelessWidget {
   final Genre genre;
 
-  const CategoryButton({
-    super.key,
-    required this.genre,
-  });
+  const CategoryButton({super.key, required this.genre,});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +20,7 @@ class CategoryButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/category',
-              arguments: {'genre': genre.name, 'genreId': genre.id.toString()});
+          Navigator.pushNamed(context, '/category', arguments: {'genre': genre.name, 'genreId': genre.id.toString()});
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: ProjectColors.background,
