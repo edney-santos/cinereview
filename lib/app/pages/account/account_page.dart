@@ -140,7 +140,7 @@ class _AccountPageState extends State<AccountPage> {
                   child: const Text(
                     'Sair',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.w400,
                       color: ProjectColors.orange,
                     ),
