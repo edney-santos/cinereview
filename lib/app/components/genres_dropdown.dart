@@ -7,7 +7,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 class GenresDropdown extends StatelessWidget {
   final String? selected;
   final String label;
-  final Function(String?)? onChange;
+  final void Function(Object?)? onChange;
 
   const GenresDropdown({
     super.key,
@@ -50,7 +50,10 @@ class GenresDropdown extends StatelessWidget {
                 vertical: 4.0,
               ),
               child: DropdownButton(
-                value: selected,
+                value: GenresList.menuItens
+                    .firstWhere((element) => element.id.toString() == selected)
+                    .id
+                    .toString(),
                 icon: const Icon(PhosphorIcons.caret_down),
                 isExpanded: true,
                 underline: Container(),

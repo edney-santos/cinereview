@@ -42,4 +42,12 @@ class UsersRepository extends ChangeNotifier {
         .set({'name': newInfo.name, 'favGenre': newInfo.favGenre});
     notifyListeners();
   }
+
+  updateInfo(UsersInfo newInfo) async {
+    await db
+        .collection('users/${auth.user!.uid}/info')
+        .doc(auth.user!.uid)
+        .update({'name': newInfo.name, 'favGenre': newInfo.favGenre});
+    notifyListeners();
+  }
 }

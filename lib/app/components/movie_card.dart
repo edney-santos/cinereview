@@ -42,7 +42,10 @@ class _MovieCardState extends State<MovieCard> {
             child: SizedBox(
               width: 120,
               height: 180,
-              child: Image.network(posterHost + widget.movie.posterPath),
+              child: Image.network(
+                posterHost + widget.movie.posterPath,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

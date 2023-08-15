@@ -135,9 +135,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     GenresDropdown(
                       label: 'Qual seu gênero de filme favorito?',
                       selected: favGenre,
-                      onChange: (String? value) {
+                      onChange: (value) {
                         setState(() {
-                          favGenre = value!;
+                          favGenre = value!.toString();
                         });
                       },
                     ),
