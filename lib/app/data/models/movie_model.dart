@@ -22,7 +22,7 @@ class MovieModel {
       map['id'],
       map['title'],
       map['overview'],
-      map['poster_path'],
+      map['poster_path'] ?? '',
       List<int>.from(map['genre_ids'] as List),
       map['vote_average'] * 1.0,
       map['vote_count'],

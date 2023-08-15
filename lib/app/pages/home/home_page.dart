@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(top: 64, left: 24, right: 24),
                 child: Column(
                   children: [
-                    HeaderSection(),
+                    const HeaderSection(),
                     Container(height: 32),
                     MovieGalery(
                       title: 'Populares',

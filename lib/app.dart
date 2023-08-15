@@ -6,6 +6,7 @@ import 'package:cinereview/app/pages/login/login_page.dart';
 import 'package:cinereview/app/pages/movieDetails/movie_details.dart';
 import 'package:cinereview/app/pages/register/resgister_page.dart';
 import 'package:cinereview/app/pages/reviews/reviews_page.dart';
+import 'package:cinereview/app/pages/search/search_page.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
 import 'package:cinereview/app/auth/auth_check.dart';
@@ -43,7 +44,8 @@ class App extends StatelessWidget {
         '/reviews': (context) => const ReviewsPage(),
         '/account': (context) => const AccountPage(),
         '/category': (context) => const CategoryPage(),
-        '/movie/info': (context) => const MovieDetails()
+        '/movie/info': (context) => const MovieDetails(),
+        '/search': (context) => const SearchPage()
       },
     );
   }

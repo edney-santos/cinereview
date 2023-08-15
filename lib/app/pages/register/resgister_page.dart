@@ -79,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Container(height: 32),
                     CustomFormField(
+                      onChanged: (String a) {},
                       controller: name,
                       label: 'Nome',
                       color: ProjectColors.orange,
@@ -96,6 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Container(height: 16),
                     CustomFormField(
+                        onChanged: (String a) {},
                         controller: email,
                         label: 'E-mail',
                         color: ProjectColors.orange,
@@ -113,6 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         }),
                     Container(height: 16),
                     CustomFormField(
+                      onChanged: (String a) {},
                       controller: password,
                       label: 'Senha',
                       color: ProjectColors.orange,

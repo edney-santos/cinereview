@@ -42,8 +42,14 @@ class _BiggerMovieCardState extends State<BiggerMovieCard> {
             child: SizedBox(
               width: double.infinity,
               height: 246,
-              child: Image.network(
-                  BiggerMovieCard.posterHost + widget.movie.posterPath),
+              child: widget.movie.posterPath != ''
+                  ? Image.network(
+                      BiggerMovieCard.posterHost + widget.movie.posterPath,
+                      fit: BoxFit.cover,
+                    )
+                  : const Center(
+                      child: Text('Poster não encontrado'),
+                    ),
             ),
           ),
         ),

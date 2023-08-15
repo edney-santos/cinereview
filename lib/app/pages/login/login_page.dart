@@ -51,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     CustomFormField(
+                      onChanged: (String a) {},
                       controller: email,
                       label: 'E-mail',
                       placeholder: 'exemplo@gmail.com',
@@ -69,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(height: 16),
                     CustomFormField(
+                      onChanged: (String a) {},
                       controller: password,
                       label: 'Senha',
                       placeholder: '************',

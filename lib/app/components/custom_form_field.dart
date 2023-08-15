@@ -10,6 +10,9 @@ class CustomFormField extends StatelessWidget {
   final TextInputType keyType;
   final bool obscureText;
   final dynamic validators;
+  final dynamic onTap;
+  final bool autoFocus;
+  final void Function(String)? onChanged;
 
   const CustomFormField({
     super.key,
@@ -19,7 +22,10 @@ class CustomFormField extends StatelessWidget {
     required this.keyType,
     required this.obscureText,
     this.validators,
+    this.onTap,
+    this.autoFocus = false,
     required this.placeholder,
+    required this.onChanged,
   });
 
   @override
@@ -36,6 +42,9 @@ class CustomFormField extends StatelessWidget {
         ),
         Container(height: 4),
         TextFormField(
+          onChanged: onChanged,
+          autofocus: autoFocus,
+          onTap: onTap,
           validator: validators,
           controller: controller,
           cursorColor: color,
