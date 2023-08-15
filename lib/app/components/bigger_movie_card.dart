@@ -2,18 +2,31 @@ import 'package:cinereview/app/data/models/movie_model.dart';
 import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
 
-class BiggerMovieCard extends StatelessWidget {
+class BiggerMovieCard extends StatefulWidget {
   static const posterHost = 'https://image.tmdb.org/t/p/w500';
   final MovieModel movie;
 
   const BiggerMovieCard({super.key, required this.movie});
 
+  @override
+  State<BiggerMovieCard> createState() => _BiggerMovieCardState();
+}
+
+class _BiggerMovieCardState extends State<BiggerMovieCard> {
   getFormattedTittle() {
-    if (movie.title.length > 30) {
-      return '${movie.title.substring(0, 30)}...';
+    if (widget.movie.title.length > 30) {
+      return '${widget.movie.title.substring(0, 30)}...';
     }
 
-    return movie.title;
+    return widget.movie.title;
+  }
+
+  goToMovieDetails() {
+    Navigator.pushNamed(
+      context,
+      '/movie/info',
+      arguments: {'movie': widget.movie},
+    );
   }
 
   @override
@@ -25,11 +38,12 @@ class BiggerMovieCard extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: InkWell(
             splashColor: Colors.black.withAlpha(30),
-            onTap: () {},
+            onTap: goToMovieDetails,
             child: SizedBox(
               width: double.infinity,
               height: 246,
-              child: Image.network(posterHost + movie.posterPath),
+              child: Image.network(
+                  BiggerMovieCard.posterHost + widget.movie.posterPath),
             ),
           ),
         ),
@@ -39,7 +53,7 @@ class BiggerMovieCard extends StatelessWidget {
         SizedBox(
           width: 150,
           child: Text(
-            movie.title,
+            widget.movie.title,
             style: ProjectText.biggerMovieCard,
             textAlign: TextAlign.center,
           ),

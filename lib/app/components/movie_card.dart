@@ -2,18 +2,31 @@ import 'package:cinereview/app/data/models/movie_model.dart';
 import 'package:cinereview/app/styles/text.dart';
 import 'package:flutter/material.dart';
 
-class MovieCard extends StatelessWidget {
-  static const posterHost = 'https://image.tmdb.org/t/p/w500';
+class MovieCard extends StatefulWidget {
   final MovieModel movie;
-
   const MovieCard({super.key, required this.movie});
 
+  @override
+  State<MovieCard> createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard> {
+  static const posterHost = 'https://image.tmdb.org/t/p/w500';
+
   getFormattedTittle() {
-    if (movie.title.length > 30) {
-      return '${movie.title.substring(0, 30)}...';
+    if (widget.movie.title.length > 30) {
+      return '${widget.movie.title.substring(0, 30)}...';
     }
 
-    return movie.title;
+    return widget.movie.title;
+  }
+
+  navigateToMovie() {
+    Navigator.pushNamed(
+      context,
+      '/movie/info',
+      arguments: {'movie': widget.movie},
+    );
   }
 
   @override
@@ -25,11 +38,11 @@ class MovieCard extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: InkWell(
             splashColor: Colors.black.withAlpha(30),
-            onTap: () {},
+            onTap: navigateToMovie,
             child: SizedBox(
               width: 120,
               height: 180,
-              child: Image.network(posterHost + movie.posterPath),
+              child: Image.network(posterHost + widget.movie.posterPath),
             ),
           ),
         ),

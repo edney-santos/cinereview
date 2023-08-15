@@ -13,7 +13,7 @@ class ProjectText {
   static const TextStyle regular = TextStyle(
     color: Colors.white,
     fontFamily: fontName,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w500,
   );
 
@@ -21,6 +21,13 @@ class ProjectText {
     color: Colors.white,
     fontFamily: fontName,
     fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const TextStyle bold20 = TextStyle(
+    fontSize: 20,
+    fontFamily: fontName,
+    color: Colors.white70,
     fontWeight: FontWeight.w700,
   );
 
@@ -34,7 +41,7 @@ class ProjectText {
 
   static const TextStyle label = TextStyle(
     color: Colors.white,
-    fontFamily: 'Montserrat',
+    fontFamily: fontName,
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
@@ -51,5 +58,12 @@ class ProjectText {
     fontFamily: fontName,
     fontSize: 16,
     fontWeight: FontWeight.w700,
+  );
+
+  static const TextStyle disabled = TextStyle(
+    fontFamily: fontName,
+    fontSize: 18,
+    color: Colors.white54,
+    fontWeight: FontWeight.w600,
   );
 }
