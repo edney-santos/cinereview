@@ -22,7 +22,7 @@ class _CategoryPageState extends State<CategoryPage> {
   );
 
   navigateBack() {
-    Navigator.pushNamed(context, '/home');
+    Navigator.pop(context);
   }
 
   @override
