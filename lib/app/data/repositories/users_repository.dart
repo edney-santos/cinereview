@@ -50,4 +50,44 @@ class UsersRepository extends ChangeNotifier {
         .update({'name': newInfo.name, 'favGenre': newInfo.favGenre});
     notifyListeners();
   }
+
+  isFavorite(String movieId) async {
+    final DocumentReference document =
+        db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
+
+    final DocumentSnapshot snapshot = await document.get();
+    final data = snapshot.data() as Map<String, dynamic>;
+    final List<dynamic> favorites = data['favorites'];
+
+    final isFavorited =
+        favorites.firstWhere((movie) => movie == movieId, orElse: () => false);
+
+    if (isFavorited == false) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  toggleFavorites(String movieId) async {
+    final DocumentReference document =
+        db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
+
+    final DocumentSnapshot snapshot = await document.get();
+    final data = snapshot.data() as Map<String, dynamic>;
+    final List<dynamic> favorites = data['favorites'];
+
+    final isFavorited =
+        favorites.firstWhere((movie) => movie == movieId, orElse: () => false);
+
+    if (isFavorited == false) {
+      document.update({
+        'favorites': FieldValue.arrayUnion([movieId])
+      });
+    } else {
+      document.update({
+        'favorites': FieldValue.arrayRemove([movieId])
+      });
+    }
+  }
 }
