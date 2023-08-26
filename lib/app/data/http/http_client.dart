@@ -24,6 +24,10 @@ class ApiUrls {
 
   static const String moviesByGender =
       '/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=';
+    
+  String getIdUrl(String id) {
+    return '/3/movie/$id?language=pt-BR';
+  }
 
   String getQueryUrl(String query) {
     return '/3/search/movie?query=$query&include_adult=true&language=pt-BR&page=1';

@@ -18,12 +18,23 @@ class MovieModel {
   );
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
+    getIds() {
+      if (map['genre_ids'] == null) {
+        List<int> genres = [];
+        for (int i = 0; i < map['genres'].length; i++) {
+          genres.add(map['genres'][i]['id']);
+        }
+        return genres;
+      }
+      return List<int>.from(map['genre_ids'] as List);
+    }
+
     return MovieModel(
       map['id'],
       map['title'],
       map['overview'],
       map['poster_path'] ?? '',
-      List<int>.from(map['genre_ids'] as List),
+      getIds(),
       map['vote_average'] * 1.0,
       map['vote_count'],
     );

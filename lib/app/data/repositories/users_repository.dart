@@ -90,4 +90,15 @@ class UsersRepository extends ChangeNotifier {
       });
     }
   }
+
+  getFavorites() async {
+    final DocumentReference document =
+        db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
+    
+    final DocumentSnapshot snapshot = await document.get();
+    final data = snapshot.data() as Map<String, dynamic>;
+    final List<dynamic> favorites = data['favorites'];
+
+    return favorites;
+  }
 }

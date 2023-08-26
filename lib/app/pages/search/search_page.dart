@@ -143,6 +143,8 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         itemBuilder: (context, index) {
                           return BiggerMovieCard(
+                            reloadFunction: () {},
+                            showFavButton: false,
                             movie: store.foundMovies.value[index],
                           );
                         },

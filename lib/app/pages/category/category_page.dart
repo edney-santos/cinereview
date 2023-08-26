@@ -99,6 +99,8 @@ class _CategoryPageState extends State<CategoryPage> {
                           ),
                           itemBuilder: (context, index) {
                             return BiggerMovieCard(
+                              reloadFunction: () {},
+                              showFavButton: false,
                               movie: store.moviesByGender.value[index],
                             );
                           },
