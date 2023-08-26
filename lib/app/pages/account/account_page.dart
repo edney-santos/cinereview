@@ -25,7 +25,7 @@ class _AccountPageState extends State<AccountPage> {
   bool isFormChanged = false;
   UsersInfo userInfo = UsersInfo(name: '', favGenre: '');
 
-  updateInfo() async {
+  void updateInfo() async {
     if (name.text != userInfo.name || favGenre != userInfo.favGenre) {
       await UsersRepository(auth: context.read<AuthService>()).saveInfo(
         UsersInfo(name: name.text, favGenre: favGenre),
@@ -37,7 +37,7 @@ class _AccountPageState extends State<AccountPage> {
     getInfo();
   }
 
-  showSnack(String message, bool erro) {
+  void showSnack(String message, bool erro) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -46,27 +46,26 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  logout() async {
+  void logout() async {
     await context.read<AuthService>().logout();
     authCheck();
   }
 
-  authCheck() {
+  void authCheck() {
     Navigator.pushNamed(context, '/');
   }
 
-  getInfo() async {
-    userInfo = await UsersRepository(
+  void getInfo() async {
+    userInfo = (await UsersRepository(
       auth: context.read<AuthService>(),
-    ).readInfo();
+    ).readInfo())!;
     setState(() {
       name.text = userInfo.name;
       favGenre = userInfo.favGenre;
     });
-    print(userInfo.favGenre);
   }
 
-  goToHome() {
+  void goToHome() {
     Navigator.popAndPushNamed(context, '/home');
   }
 

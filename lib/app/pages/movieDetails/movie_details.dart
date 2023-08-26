@@ -28,7 +28,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     return formater.format(num);
   }
 
-  getGendersName(List<int> ids) {
+  String getGendersName(List<int> ids) {
     if (ids.isEmpty) {
       return '';
     }
@@ -59,11 +59,11 @@ class _MovieDetailsState extends State<MovieDetails> {
     return genderNames;
   }
 
-  goFoward() {
+  void goFoward() {
     Navigator.pop(context);
   }
 
-  saveFavorite() async {
+  Future<void> saveFavorite() async {
     await UsersRepository(
       auth: context.read<AuthService>(),
     ).toggleFavorites(movie.id.toString());
@@ -72,7 +72,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     });
   }
 
-  getIsFavorite() async {
+  Future<void> getIsFavorite() async {
     final response = await UsersRepository(
       auth: context.read<AuthService>(),
     ).isFavorite(movie.id.toString());
@@ -82,7 +82,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     });
   }
 
-  getPageinfo() async {
+  Future<void> getPageinfo() async {
     dynamic arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, MovieModel>;
     movie = arguments['movie'];

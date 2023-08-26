@@ -9,7 +9,7 @@ class NavBar extends StatelessWidget {
 
   const NavBar(this._context, this.selectedIndex, {super.key});
 
-  handleNavigation(int index) {
+  void handleNavigation(int index) {
     switch (index) {
       case 0:
         {

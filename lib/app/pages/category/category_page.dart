@@ -21,7 +21,7 @@ class _CategoryPageState extends State<CategoryPage> {
     ),
   );
 
-  navigateBack() {
+  void navigateBack() {
     Navigator.pop(context);
   }
 

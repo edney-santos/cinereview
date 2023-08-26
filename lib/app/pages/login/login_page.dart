@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  login() async {
+  void login() async {
     try {
       await context.read<AuthService>().login(email.text, password.text);
     } on AuthException catch (error) {

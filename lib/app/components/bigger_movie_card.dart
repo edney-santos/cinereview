@@ -24,7 +24,7 @@ class BiggerMovieCard extends StatefulWidget {
 }
 
 class _BiggerMovieCardState extends State<BiggerMovieCard> {
-  getFormattedTittle() {
+  String getFormattedTittle() {
     if (widget.movie.title.length > 30) {
       return '${widget.movie.title.substring(0, 30)}...';
     }
@@ -32,7 +32,7 @@ class _BiggerMovieCardState extends State<BiggerMovieCard> {
     return widget.movie.title;
   }
 
-  goToMovieDetails() {
+  void goToMovieDetails() {
     Navigator.pushNamed(
       context,
       '/movie/info',
@@ -40,7 +40,7 @@ class _BiggerMovieCardState extends State<BiggerMovieCard> {
     );
   }
 
-  toggleFavorite() async {
+  void toggleFavorite() async {
     await UsersRepository(
       auth: context.read<AuthService>(),
     ).toggleFavorites(widget.movie.id.toString());

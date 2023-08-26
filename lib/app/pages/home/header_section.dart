@@ -13,7 +13,7 @@ class HeaderSection extends StatefulWidget {
 class _HeaderSectionState extends State<HeaderSection> {
   final search = TextEditingController();
 
-  goToSearch() {
+  void goToSearch() {
     Navigator.pushNamed(context, '/search');
   }
 

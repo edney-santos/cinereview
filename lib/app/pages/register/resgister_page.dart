@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final confirmPassword = TextEditingController();
   String favGenre = GenresList.menuItens[0].id.toString();
 
-  register() async {
+  Future<void> register() async {
     try {
       await context.read<AuthService>().register(email.text, password.text);
       await saveInfo();
@@ -37,14 +37,14 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  saveInfo() async {
+  Future<void> saveInfo() async {
     await UsersRepository(auth: context.read<AuthService>()).saveInfo(
       UsersInfo(name: name.text, favGenre: favGenre),
     );
     authCheck();
   }
 
-  authCheck() {
+  void authCheck() {
     Navigator.pushNamed(context, '/');
   }
 

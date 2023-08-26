@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cinereview/app/data/database/db_firestore.dart';
 import 'package:cinereview/app/data/models/info_model.dart';
 import 'package:cinereview/app/services/auth_service.dart';
@@ -21,7 +23,7 @@ class UsersRepository extends ChangeNotifier {
     db = DBFirestore.get();
   }
 
-  readInfo() async {
+  Future<UsersInfo?> readInfo() async {
     if (auth.user != null) {
       final snapshot = await db
           .collection('users/${auth.user!.uid}/info')
@@ -32,10 +34,12 @@ class UsersRepository extends ChangeNotifier {
         favGenre: snapshot.data()!.values.toList()[0],
       );
       return info;
+    } else {
+      return null;
     }
   }
 
-  saveInfo(UsersInfo newInfo) async {
+  Future<void> saveInfo(UsersInfo newInfo) async {
     await db
         .collection('users/${auth.user!.uid}/info')
         .doc(auth.user!.uid)
@@ -43,7 +47,7 @@ class UsersRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateInfo(UsersInfo newInfo) async {
+  Future<void> updateInfo(UsersInfo newInfo) async {
     await db
         .collection('users/${auth.user!.uid}/info')
         .doc(auth.user!.uid)
@@ -51,7 +55,7 @@ class UsersRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  isFavorite(String movieId) async {
+  Future<bool> isFavorite(String movieId) async {
     final DocumentReference document =
         db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
 
@@ -69,7 +73,7 @@ class UsersRepository extends ChangeNotifier {
     }
   }
 
-  toggleFavorites(String movieId) async {
+  Future<void> toggleFavorites(String movieId) async {
     final DocumentReference document =
         db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
 
@@ -91,7 +95,7 @@ class UsersRepository extends ChangeNotifier {
     }
   }
 
-  getFavorites() async {
+  Future<List<dynamic>> getFavorites() async {
     final DocumentReference document =
         db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
     

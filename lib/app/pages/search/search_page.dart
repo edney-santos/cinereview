@@ -27,12 +27,12 @@ class _SearchPageState extends State<SearchPage> {
   final search = TextEditingController();
   Timer debounceTimer = Timer(const Duration(seconds: 30), () {});
 
-  goBackHome() {
+  void goBackHome() {
     FocusScope.of(context).unfocus();
     Navigator.pop(context);
   }
 
-  onSearchChange() {
+  void onSearchChange() {
     debounceTimer.cancel();
 
     debounceTimer = Timer(const Duration(seconds: 1), () {

@@ -18,7 +18,7 @@ class MovieModel {
   );
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
-    getIds() {
+    List<int> getIds() {
       if (map['genre_ids'] == null) {
         List<int> genres = [];
         for (int i = 0; i < map['genres'].length; i++) {

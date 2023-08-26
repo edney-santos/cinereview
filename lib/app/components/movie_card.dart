@@ -13,7 +13,7 @@ class MovieCard extends StatefulWidget {
 class _MovieCardState extends State<MovieCard> {
   static const posterHost = 'https://image.tmdb.org/t/p/w500';
 
-  getFormattedTittle() {
+  String getFormattedTittle() {
     if (widget.movie.title.length > 30) {
       return '${widget.movie.title.substring(0, 30)}...';
     }
@@ -21,7 +21,7 @@ class _MovieCardState extends State<MovieCard> {
     return widget.movie.title;
   }
 
-  navigateToMovie() {
+  void navigateToMovie() {
     Navigator.pushNamed(
       context,
       '/movie/info',

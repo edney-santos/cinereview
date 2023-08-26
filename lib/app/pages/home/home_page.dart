@@ -29,12 +29,12 @@ class _HomePageState extends State<HomePage> {
 
   late UsersInfo info;
 
-  getInfo() async {
-    info = await UsersRepository(auth: context.read<AuthService>()).readInfo();
+  void getInfo() async {
+    info = (await UsersRepository(auth: context.read<AuthService>()).readInfo())!;
     store.loadHomepage(info.favGenre);
   }
 
-  logout() async {
+  void logout() async {
     await context.read<AuthService>().logout();
   }
 
