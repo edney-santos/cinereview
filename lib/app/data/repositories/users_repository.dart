@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cinereview/app/data/database/db_firestore.dart';
 import 'package:cinereview/app/data/models/info_model.dart';
 import 'package:cinereview/app/services/auth_service.dart';
@@ -9,6 +7,7 @@ import 'package:flutter/material.dart';
 class UsersRepository extends ChangeNotifier {
   late FirebaseFirestore db;
   late AuthService auth;
+  UsersInfo userInfo = UsersInfo(name: '', favGenre: '');
 
   UsersRepository({required this.auth}) {
     _startRepository();
@@ -33,6 +32,7 @@ class UsersRepository extends ChangeNotifier {
         name: snapshot.data()!.values.toList()[1],
         favGenre: snapshot.data()!.values.toList()[0],
       );
+      userInfo = info;
       return info;
     } else {
       return null;
@@ -98,7 +98,7 @@ class UsersRepository extends ChangeNotifier {
   Future<List<dynamic>> getFavorites() async {
     final DocumentReference document =
         db.doc('users/${auth.user!.uid}/favorites/${auth.user!.uid}');
-    
+
     final DocumentSnapshot snapshot = await document.get();
     final data = snapshot.data() as Map<String, dynamic>;
     final List<dynamic> favorites = data['favorites'];
