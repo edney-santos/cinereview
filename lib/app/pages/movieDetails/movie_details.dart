@@ -1,3 +1,4 @@
+import 'package:cinereview/app/components/review_dialog.dart';
 import 'package:cinereview/app/data/genres_list.dart';
 import 'package:cinereview/app/data/models/movie_model.dart';
 import 'package:cinereview/app/data/repositories/users_repository.dart';
@@ -90,6 +91,13 @@ class _MovieDetailsState extends State<MovieDetails> {
       getOnce = true;
       await getIsFavorite();
     }
+  }
+
+  void _showReviewDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AddReviewDialog(movie: movie),
+    );
   }
 
   @override
@@ -210,6 +218,23 @@ class _MovieDetailsState extends State<MovieDetails> {
                       ),
                       Container(height: 48)
                     ],
+                  ),
+                ),
+              ),
+              floatingActionButton: SizedBox(
+                width: 70,
+                height: 70,
+                child: FittedBox(
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      _showReviewDialog(context);
+                    },
+                    backgroundColor: ProjectColors.pink,
+                    child: const Icon(
+                      PhosphorIcons.pencil,
+                      size: 32,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

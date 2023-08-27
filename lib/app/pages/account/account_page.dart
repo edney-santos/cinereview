@@ -30,14 +30,14 @@ class _AccountPageState extends State<AccountPage> {
       await UsersRepository(auth: context.read<AuthService>()).saveInfo(
         UsersInfo(name: name.text, favGenre: favGenre),
       );
-      showSnack('Informações atualizadas com sucesso!', false);
+      showSnackBar('Informações atualizadas com sucesso!', false);
     } else {
-      showSnack('As informações não foram alteradas', true);
+      showSnackBar('As informações não foram alteradas', true);
     }
     getInfo();
   }
 
-  void showSnack(String message, bool erro) {
+  void showSnackBar(String message, bool erro) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),

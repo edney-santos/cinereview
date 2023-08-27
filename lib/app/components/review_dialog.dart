@@ -1,5 +1,7 @@
 import 'package:cinereview/app/components/block_button.dart';
 import 'package:cinereview/app/components/custom_outlined_button.dart';
+import 'package:cinereview/app/data/models/movie_model.dart';
+import 'package:cinereview/app/data/repositories/reviews_repository.dart';
 import 'package:cinereview/app/data/repositories/users_repository.dart';
 import 'package:cinereview/app/styles/colors.dart';
 import 'package:cinereview/app/styles/text.dart';
@@ -8,9 +10,9 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:provider/provider.dart';
 
 class AddReviewDialog extends StatefulWidget {
-  final int movieId;
+  final MovieModel movie;
 
-  const AddReviewDialog({super.key, required this.movieId});
+  const AddReviewDialog({super.key, required this.movie});
 
   @override
   State<AddReviewDialog> createState() => _AddReviewDialogState();
@@ -20,11 +22,38 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
   double _currentValue = 0;
   late String username;
   final TextEditingController _review = TextEditingController();
+  late ReviewsRepository reviewsRepository;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     username = Provider.of<UsersRepository>(context).userInfo.name;
+    reviewsRepository = Provider.of<ReviewsRepository>(context);
+  }
+
+  Future<void> addReview() async {
+    try {
+      await reviewsRepository.addReviews(
+          widget.movie, username, _currentValue, _review.text);
+      showSnack('Review adicionado com sucesso', false);
+      closeDialog();
+    } catch (e) {
+      showSnack('Não foi possível adiciona o review', true);
+      closeDialog();
+    }
+  }
+
+  void showSnack(String message, bool erro) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: erro ? ProjectColors.pink : Colors.green[800],
+      ),
+    );
+  }
+
+  void closeDialog() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -44,7 +73,7 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
           const Spacer(),
           IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              closeDialog();
             },
             icon: const Icon(
               PhosphorIcons.x,
@@ -121,12 +150,14 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                     Container(height: 96),
                     BlockButton(
                       label: 'Postar Review',
-                      onPressed: () {},
+                      onPressed: () {
+                        addReview();
+                      },
                     ),
                     Container(height: 16),
                     CustomOutlinedButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        closeDialog();
                       },
                       label: 'Cancelar',
                     )
