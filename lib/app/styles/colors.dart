@@ -6,6 +6,7 @@ class ProjectColors {
   static const Color background = Color(0xFF131824);
   static const Color gray = Color(0xFF232936);
   static const Color lightGray = Color(0xFF4E596F);
+  static const Color darkGray = Color(0xFF1F2430);
 
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topCenter,

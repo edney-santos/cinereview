@@ -1,6 +1,9 @@
+import 'package:cinereview/app/components/review_card.dart';
 import 'package:cinereview/app/components/review_dialog.dart';
 import 'package:cinereview/app/data/genres_list.dart';
 import 'package:cinereview/app/data/models/movie_model.dart';
+import 'package:cinereview/app/data/models/review_model.dart';
+import 'package:cinereview/app/data/repositories/reviews_repository.dart';
 import 'package:cinereview/app/data/repositories/users_repository.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cinereview/app/styles/colors.dart';
@@ -20,9 +23,35 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   static const posterHost = 'https://image.tmdb.org/t/p/w500';
   late MovieModel movie;
+  late dynamic urlArguments;
+  late ReviewsRepository reviewsRepository;
+  List<ReviewModel> reviews = [];
   bool isFavorite = false;
   bool getOnce = false;
   bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    urlArguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, MovieModel>;
+    reviewsRepository = Provider.of<ReviewsRepository>(context);
+    getPageinfo();
+    teste();
+  }
+
+  void teste() async {
+    List<ReviewModel> data = await reviewsRepository.getMovieReviews(movie.id);
+
+    setState(() {
+      reviews = data;
+    });
+  }
 
   String formatNumber(int num) {
     final formater = NumberFormat('#,##0', 'pt_BR');
@@ -84,9 +113,7 @@ class _MovieDetailsState extends State<MovieDetails> {
   }
 
   Future<void> getPageinfo() async {
-    dynamic arguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, MovieModel>;
-    movie = arguments['movie'];
+    movie = urlArguments['movie'];
     if (!getOnce) {
       getOnce = true;
       await getIsFavorite();
@@ -102,8 +129,8 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    getPageinfo();
     String formatedVotes = formatNumber(movie.voteCount);
+
     return WillPopScope(
       onWillPop: () async {
         FocusScope.of(context).unfocus();
@@ -216,7 +243,35 @@ class _MovieDetailsState extends State<MovieDetails> {
                           Text('Reviews', style: ProjectText.tittle),
                         ],
                       ),
-                      Container(height: 48)
+                      Container(height: 16),
+                      Visibility(
+                        visible: reviews.isEmpty,
+                        child: Column(
+                          children: [
+                            const Row(
+                              children: [
+                                Text(
+                                  'Nenhum review foi adicionado',
+                                  style: ProjectText.bold20,
+                                ),
+                              ],
+                            ),
+                            Container(height: 80),
+                          ],
+                        ),
+                      ),
+                      reviews.isNotEmpty
+                          ? ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: reviews.length,
+                              itemBuilder: (context, index) {
+                                return ReviewCard(review: reviews[index]);
+                              },
+                            )
+                          : Container(),
+                      Container(height: 96)
                     ],
                   ),
                 ),

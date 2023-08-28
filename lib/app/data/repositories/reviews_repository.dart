@@ -1,6 +1,6 @@
 import 'package:cinereview/app/data/database/db_firestore.dart';
-import 'package:cinereview/app/data/models/info_model.dart';
 import 'package:cinereview/app/data/models/movie_model.dart';
+import 'package:cinereview/app/data/models/review_model.dart';
 import 'package:cinereview/app/services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +37,34 @@ class ReviewsRepository extends ChangeNotifier {
         'reviewerId': auth.user!.uid,
         'review': review,
         'rating': rating,
-        'timestamp': FieldValue.serverTimestamp(),
+        'timestamp': DateTime.now(),
       });
-      print('Review adicionado');
     } catch (e) {
-      print('Algo deu errado: $e');
+      throw Exception('Algo deu errado: $e');
+    }
+  }
+
+  Future<List<ReviewModel>> getMovieReviews(int movieId) async {
+    final CollectionReference reviewsCollection = db.collection('reviews');
+
+    List<ReviewModel> reviews = [];
+
+    try {
+      QuerySnapshot snapshot =
+          await reviewsCollection.where('movieId', isEqualTo: movieId).get();
+
+      if (snapshot.docs.isEmpty) {
+        return reviews;
+      }
+
+      for (DocumentSnapshot doc in snapshot.docs) {
+        Map<String, dynamic> dataMap = doc.data() as Map<String, dynamic>;
+        reviews.add(ReviewModel.fromMap(dataMap));
+      }
+
+      return reviews;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }
