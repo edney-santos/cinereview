@@ -25,6 +25,7 @@ class App extends StatelessWidget {
     ));
 
     return MaterialApp(
+      title: 'Cinereview',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

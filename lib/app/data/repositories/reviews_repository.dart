@@ -37,7 +37,7 @@ class ReviewsRepository extends ChangeNotifier {
         'reviewerId': auth.user!.uid,
         'review': review,
         'rating': rating,
-        'timestamp': DateTime.now(),
+        'date': DateTime.now().toString(),
       });
     } catch (e) {
       throw Exception('Algo deu errado: $e');

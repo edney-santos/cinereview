@@ -5,7 +5,7 @@ class ReviewModel {
   final String movieTitle;
   final String reviewerName;
   final String review;
-  final String timestamp;
+  final String date;
 
   ReviewModel(
     this.movieId,
@@ -14,7 +14,7 @@ class ReviewModel {
     this.movieTitle,
     this.reviewerName,
     this.review,
-    this.timestamp,
+    this.date,
   );
 
   factory ReviewModel.fromMap(Map<String, dynamic> map) {
@@ -25,7 +25,7 @@ class ReviewModel {
       map['movieTitle'],
       map['reviewerName'],
       map['review'],
-      map['timestamp'],
+      map['date'],
     );
   }
 }

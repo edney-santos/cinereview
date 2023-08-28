@@ -42,10 +42,10 @@ class _MovieDetailsState extends State<MovieDetails> {
         ModalRoute.of(context)!.settings.arguments as Map<String, MovieModel>;
     reviewsRepository = Provider.of<ReviewsRepository>(context);
     getPageinfo();
-    teste();
+    getReviews();
   }
 
-  void teste() async {
+  void getReviews() async {
     List<ReviewModel> data = await reviewsRepository.getMovieReviews(movie.id);
 
     setState(() {
@@ -124,7 +124,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     showDialog(
       context: context,
       builder: (context) => AddReviewDialog(movie: movie),
-    );
+    ).then((value) => getReviews());
   }
 
   @override
