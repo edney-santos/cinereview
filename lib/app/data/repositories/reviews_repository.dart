@@ -67,4 +67,29 @@ class ReviewsRepository extends ChangeNotifier {
       throw Exception(e);
     }
   }
+
+  Future<List<ReviewModel>> getUserReviews() async {
+    final CollectionReference reviewsCollection = db.collection('reviews');
+
+    List<ReviewModel> reviews = [];
+
+    try {
+      QuerySnapshot snapshot = await reviewsCollection
+          .where('reviewerId', isEqualTo: auth.user!.uid)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return reviews;
+      }
+
+      for (DocumentSnapshot doc in snapshot.docs) {
+        Map<String, dynamic> dataMap = doc.data() as Map<String, dynamic>;
+        reviews.add(ReviewModel.fromMap(dataMap));
+      }
+
+      return reviews;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

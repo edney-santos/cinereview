@@ -8,60 +8,75 @@ class ReviewCard extends StatelessWidget {
   final ReviewModel review;
   final bool showMovieTitle;
 
-  const ReviewCard({super.key, required this.review, this.showMovieTitle = false});
+  const ReviewCard(
+      {super.key, required this.review, this.showMovieTitle = false});
 
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      widthFactor: 0.98,
-      child: IntrinsicHeight(
-        child: Container(
-          decoration: BoxDecoration(
-            color: ProjectColors.gray,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Row(
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(width: 4),
+            Visibility(
+              visible: showMovieTitle,
+              child: Text(review.movieTitle, style: ProjectText.bold),
+            ),
+          ],
+        ),
+        Container(height: 8),
+        FractionallySizedBox(
+          widthFactor: 0.98,
+          child: IntrinsicHeight(
+            child: Container(
+              decoration: BoxDecoration(
+                color: ProjectColors.gray,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
                   children: [
-                    Text(
-                      review.reviewerName,
-                      style: ProjectText.bold,
+                    Row(
+                      children: [
+                        Text(
+                          review.reviewerName,
+                          style: ProjectText.bold,
+                        ),
+                        const Spacer(),
+                        Icon(
+                          PhosphorIcons.star_fill,
+                          size: 20,
+                          color: Colors.amber[600],
+                        ),
+                        Container(width: 4),
+                        Text(
+                          review.rating.toString(),
+                          style: ProjectText.bold20,
+                        )
+                      ],
                     ),
-                    const Spacer(),
-                    Icon(
-                      PhosphorIcons.star_fill,
-                      size: 20,
-                      color: Colors.amber[600],
+                    Container(height: 16),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: ProjectColors.darkGray,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          textAlign: TextAlign.left,
+                          review.review,
+                          style: ProjectText.bold,
+                        ),
+                      ),
                     ),
-                    Container(width: 4),
-                    Text(
-                      review.rating.toString(),
-                      style: ProjectText.bold20,
-                    )
                   ],
                 ),
-                Container(height: 16),
-                Container(
-                  decoration: BoxDecoration(
-                      color: ProjectColors.darkGray,
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      textAlign: TextAlign.left,
-                      review.review,
-                      style: ProjectText.bold,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
