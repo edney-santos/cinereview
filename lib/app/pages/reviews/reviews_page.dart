@@ -1,3 +1,5 @@
+import 'package:cinereview/app/components/block_button.dart';
+import 'package:cinereview/app/components/custom_outlined_button.dart';
 import 'package:cinereview/app/components/nav_bar.dart';
 import 'package:cinereview/app/components/review_card.dart';
 import 'package:cinereview/app/data/repositories/reviews_repository.dart';
@@ -32,6 +34,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
 
     store.getReviews();
   }
+
+  final reviewEC = TextEditingController();
+  double sliderValue = 0.0;
 
   navigateBack() {
     Navigator.pushNamed(context, '/home');
@@ -102,9 +107,201 @@ class _ReviewsPageState extends State<ReviewsPage> {
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-                              ReviewCard(
-                                review: store.userReviews.value[index],
-                                showMovieTitle: true,
+                              Stack(
+                                children: [
+                                  ReviewCard(
+                                    review: store.userReviews.value[index],
+                                    showMovieTitle: true,
+                                  ),
+                                  Positioned(
+                                    right: 0.0,
+                                    top: -15.0,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        IconButton(
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) {
+                                                return StatefulBuilder(builder:
+                                                    (BuildContext context,
+                                                        setState) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Editar Review'),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              PhosphorIcons
+                                                                  .star_fill,
+                                                              color: Colors
+                                                                  .amber[600],
+                                                            ),
+                                                            Container(width: 8),
+                                                            Text(
+                                                              sliderValue
+                                                                  .toStringAsFixed(
+                                                                      1),
+                                                              style: ProjectText
+                                                                  .tittle,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Slider(
+                                                          activeColor:
+                                                              ProjectColors
+                                                                  .orange,
+                                                          value: sliderValue,
+                                                          min: 0,
+                                                          max: 10,
+                                                          divisions: 100,
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              sliderValue =
+                                                                  value;
+                                                            });
+                                                          },
+                                                        ),
+                                                        TextField(
+                                                          maxLength: 500,
+                                                          maxLines: 3,
+                                                          controller: reviewEC
+                                                            ..text = store
+                                                                .userReviews
+                                                                .value[index]
+                                                                .review,
+                                                          cursorColor:
+                                                              ProjectColors
+                                                                  .orange,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            filled: true,
+                                                            fillColor: Colors
+                                                                .white
+                                                                .withOpacity(
+                                                                    0.01),
+                                                            labelText:
+                                                                'Digite o seu review...',
+                                                            labelStyle: const TextStyle(
+                                                                color: ProjectColors
+                                                                    .lightGray),
+                                                            floatingLabelBehavior:
+                                                                FloatingLabelBehavior
+                                                                    .never,
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color:
+                                                                    ProjectColors
+                                                                        .orange,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            contentPadding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                              vertical: 20.0,
+                                                              horizontal: 16.0,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(height: 16),
+                                                        BlockButton(
+                                                          label:
+                                                              'Editar Review',
+                                                          onPressed: () async {
+                                                            await store
+                                                                .editReview(
+                                                              store
+                                                                  .userReviews
+                                                                  .value[index]
+                                                                  .reviewerId,
+                                                              store
+                                                                  .userReviews
+                                                                  .value[index]
+                                                                  .movieId,
+                                                              store
+                                                                  .userReviews
+                                                                  .value[index]
+                                                                  .movieTitle,
+                                                              store
+                                                                  .userReviews
+                                                                  .value[index]
+                                                                  .reviewerName,
+                                                              sliderValue,
+                                                              reviewEC.text
+                                                                  .trim(),
+                                                              index,
+                                                            );
+                                                            if (mounted) {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            }
+                                                            await store
+                                                                .getReviews();
+                                                          },
+                                                        ),
+                                                        Container(height: 16),
+                                                        CustomOutlinedButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                              context,
+                                                            );
+                                                          },
+                                                          label: 'Cancelar',
+                                                        )
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                              },
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.edit,
+                                            color: Colors.deepOrange.shade100,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () async {
+                                            await store.deleteReview(
+                                              store.userReviews.value[index]
+                                                  .reviewerId,
+                                              index,
+                                            );
+                                            await store.getReviews();
+                                          },
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.red.shade300,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                               Container(height: 16)
                             ],

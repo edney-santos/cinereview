@@ -16,11 +16,18 @@ class ReviewCard extends StatelessWidget {
     return Column(
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(width: 4),
             Visibility(
               visible: showMovieTitle,
-              child: Text(review.movieTitle, style: ProjectText.bold),
+              child: Flexible(
+                child: Text(
+                  review.movieTitle,
+                  style: ProjectText.bold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ),
           ],
         ),
@@ -51,7 +58,7 @@ class ReviewCard extends StatelessWidget {
                         ),
                         Container(width: 4),
                         Text(
-                          review.rating.toString(),
+                          review.rating.toStringAsFixed(2),
                           style: ProjectText.bold20,
                         )
                       ],

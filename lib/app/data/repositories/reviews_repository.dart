@@ -44,6 +44,60 @@ class ReviewsRepository extends ChangeNotifier {
     }
   }
 
+  Future<void> editReview(
+    String reviewId,
+    int movieID,
+    String movieTitle,
+    String userName,
+    double rating,
+    String review,
+    int index,
+  ) async {
+    final CollectionReference reviewsCollection = db.collection('reviews');
+
+    try {
+      QuerySnapshot snapshot = await reviewsCollection
+          .where('reviewerId', isEqualTo: auth.user!.uid)
+          .get();
+
+      // Verifique se o documento existe antes de tentar editá-lo
+      if (snapshot.docs.isNotEmpty) {
+        final DocumentReference reviewDoc =
+            reviewsCollection.doc(snapshot.docs[index].id);
+
+        await reviewDoc.update({
+          'movieId': movieID,
+          'movieTitle': movieTitle,
+          'reviewerName': userName,
+          'reviewerId': auth.user!.uid,
+          'review': review,
+          'rating': rating,
+          'date': DateTime.now().toString(),
+        });
+      } else {
+        throw Exception('Revisão não encontrada com o ID: $reviewId');
+      }
+    } catch (e) {
+      throw Exception('Algo deu errado ao editar a revisão: $e');
+    }
+  }
+
+  Future<void> deleteReview(String reviewId, int index) async {
+    final CollectionReference reviewsCollection = db.collection('reviews');
+
+    try {
+      QuerySnapshot snapshot = await reviewsCollection
+          .where('reviewerId', isEqualTo: auth.user!.uid)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        await reviewsCollection.doc(snapshot.docs[index].id).delete();
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<List<ReviewModel>> getMovieReviews(int movieId) async {
     final CollectionReference reviewsCollection = db.collection('reviews');
 
