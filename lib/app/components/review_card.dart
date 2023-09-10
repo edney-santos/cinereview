@@ -11,19 +11,27 @@ class ReviewCard extends StatelessWidget {
   const ReviewCard(
       {super.key, required this.review, this.showMovieTitle = false});
 
+  String getFormattedTittle() {
+    if (review.movieTitle.length > 20) {
+      return '${review.movieTitle.substring(0, 20)}...';
+    }
+
+    return review.movieTitle;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(width: 4),
             Visibility(
               visible: showMovieTitle,
               child: Flexible(
                 child: Text(
-                  review.movieTitle,
+                  getFormattedTittle(),
                   style: ProjectText.bold,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -58,7 +66,7 @@ class ReviewCard extends StatelessWidget {
                         ),
                         Container(width: 4),
                         Text(
-                          review.rating.toStringAsFixed(2),
+                          review.rating.toStringAsFixed(1),
                           style: ProjectText.bold20,
                         )
                       ],

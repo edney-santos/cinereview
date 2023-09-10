@@ -279,7 +279,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                             );
                                           },
                                           icon: Icon(
-                                            Icons.edit,
+                                            PhosphorIcons.pencil_fill,
                                             color: Colors.deepOrange.shade100,
                                           ),
                                         ),
@@ -294,7 +294,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                             await store.getReviews();
                                           },
                                           icon: Icon(
-                                            Icons.delete,
+                                            PhosphorIcons.trash_fill,
                                             color: Colors.red.shade300,
                                           ),
                                         ),

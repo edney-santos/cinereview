@@ -22,11 +22,16 @@ class _LoginPageState extends State<LoginPage> {
   void login() async {
     try {
       await context.read<AuthService>().login(email.text, password.text);
+      authRoute();
     } on AuthException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error.message)),
       );
     }
+  }
+
+  void authRoute() {
+    Navigator.pushNamed(context, '/');
   }
 
   @override
