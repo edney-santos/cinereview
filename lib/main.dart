@@ -35,7 +35,7 @@ Future<void> main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => CharactersRepositiry(
+          create: (context) => CharactersRepository(
             auth: context.read<AuthService>(),
           ),
         )
